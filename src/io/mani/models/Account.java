@@ -31,9 +31,7 @@ public class Account {
         //initial a list of transactions
         this.transactions = new ArrayList<Transaction>();
 
-        //add this object to the bank and to account holder , Bank and User
-        accountHolder.addAccount(this);
-        bank.addAccount(this);
+
 
     }
 

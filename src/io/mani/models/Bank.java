@@ -80,11 +80,22 @@ public class Bank {
     }
 
     /**
-     * add account to accounts list
-     *
-     * @param account specific account
+     * define a new user for the bank to register
+     * @param firstName first name of the user
+     * @param lastName last name of the user
+     * @param pin pin number of the user
+     * @return  The new defined User object
      */
-    public void addAccount(Account account) {
-        this.accounts.add(account);
+    public User addUser(String firstName,String lastName ,String pin){
+        //create a new user object and add it the defined list of users (customerList)
+        User newUser = new User(firstName, lastName, pin,this);
+        this.customersList.add(newUser);
+        //create a saving account for each specified user
+        Account newAccount = new Account("Saving Money",newUser,this);
+
+        //add this object to the bank and to account holder , Bank and User
+        newUser.addAccount(newAccount);
+        this.accounts.add(newAccount);
+        return newUser;
     }
 }
