@@ -98,4 +98,14 @@ public class Bank {
         this.accounts.add(newAccount);
         return newUser;
     }
+
+    /**
+     * this method check the credibility of user
+     * @param userID UUID of the user
+     * @param pin pin number of the user
+     * @return User object in successful login otherwise return null
+     */
+    public User userLogin(String userID, String pin){
+
+    }
 }
