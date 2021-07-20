@@ -134,6 +134,34 @@ public class AutomaticATM {
             }
         } while (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts());
         accountBalance = theUser.getAccountBalance(fromAccount);
+        // get the accounts to transfer to
+        do {
+            System.out.printf("Enter the number (1-%d) of the account \n " +
+                    "to transfer to :");
+            toAccount = scanner.nextInt()-1;
+            if (toAccount<0 || toAccount>=theUser.numberOfAccounts()){
+                System.out.println("Invalid account Number , Please try again .");
+            }
+        } while (toAccount < 0 || toAccount >= theUser.numberOfAccounts());
+
+        //get the amount to transfer
+        do {
+            System.out.printf("Enter the amount of your desire transfer (max €%.02f)",accountBalance);
+            amount = scanner.nextDouble();
+            if (amount<0){
+                System.out.println("Negative amount is not allowed !!");
+            } else if (amount>accountBalance){
+                System.out.printf("You have not sufficient deposit to do this transaction !\n"+
+                        "It can not be greater than €%.02f.\n ",accountBalance);
+            }
+        } while (amount<0|| amount>accountBalance);
+        // finally do the transfer
+        theUser.addAccountTransaction(fromAccount, -1 * amount, String.format(
+                "Transfer to Account %s", theUser.getAccountUUID(toAccount)
+        ));
+        theUser.addAccountTransaction(toAccount, amount, String.format(
+                "Transfer to Account %s", theUser.getAccountUUID(fromAccount)
+        ));
 
 
     }

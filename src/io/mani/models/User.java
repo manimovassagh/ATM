@@ -139,4 +139,23 @@ public class User {
     public double getAccountBalance(int theAccountIndex) {
         return this.accounts.get(theAccountIndex).getBalance();
     }
+
+    /**
+     * get id from each account
+     * @param accountIndex index of account
+     * @return id of the specific account
+     */
+    public String getAccountUUID(int accountIndex) {
+        return this.accounts.get(accountIndex).getUUID();
+    }
+
+    /**
+     * add account transaction
+     * @param accountIndex index of account
+     * @param amount amount of transaction
+     * @param memo memo for transaction
+     */
+    public void addAccountTransaction(int accountIndex, double amount, String memo) {
+        this.accounts.get(accountIndex).addTransaction(amount,memo);
+    }
 }

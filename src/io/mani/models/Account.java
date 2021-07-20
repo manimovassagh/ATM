@@ -80,4 +80,16 @@ public class Account {
         }
         System.out.println();
     }
+
+    /**
+     * add transaction for each account
+     * create a new transaction object and added to list
+     * @param amount amount of transaction
+     * @param memo memo for transaction
+     */
+    public void addTransaction(double amount, String memo) {
+        Transaction newTransaction = new Transaction(amount, memo,this);
+        this.transactions.add(newTransaction);
+
+    }
 }
