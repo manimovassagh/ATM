@@ -17,6 +17,20 @@ public class Bank {
      */
     private ArrayList<Account> accounts;
 
+
+    /**
+     * Create our new bank objects
+     * create an empty list of customers
+     * create an empty list of accounts
+     * @param bankName the name of our bank object
+     */
+    public Bank(String bankName) {
+        this.name = bankName;
+        this.customersList = new ArrayList<User>();
+        this.accounts = new ArrayList<Account>();
+
+    }
+
     /**
      * get the user uuid
      *

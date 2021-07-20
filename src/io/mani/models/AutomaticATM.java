@@ -1,5 +1,11 @@
 package io.mani.models;
 
-public class AutomaticATM {
+import java.util.Scanner;
 
+public class AutomaticATM {
+    //initialize scanner
+    Scanner scanner = new Scanner(System.in);
+
+    // initialize Bank
+    Bank theBank = new Bank("Sparkasse mainz");
 }
