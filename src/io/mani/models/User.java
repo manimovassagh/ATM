@@ -49,7 +49,7 @@ public class User {
         } catch (NoSuchAlgorithmException e) {
             System.out.println("The Entered Method could not be recognised. Please Enter a valid Method!");
             e.printStackTrace();
-//          System.exit(1);
+            System.exit(1);
         }
         //This UUID must obviously come from database but i don't want to bring it already.
         //can be later generate in database side
@@ -58,12 +58,13 @@ public class User {
         //create empty list of accounts
         this.accounts = new ArrayList<Account>();
 
-        System.out.printf("New User %s, %s with ID Number %s Has been Created\n" ,lastName,firstName,this.uuid);
+        System.out.printf("New User %s, %s with ID Number %s Has been Created\n", lastName, firstName, this.uuid);
     }
 
     /**
      * adding accounts to our accounts array list
-     *  @param account the specific given account
+     *
+     * @param account the specific given account
      */
     public void addAccount(Account account) {
         this.accounts.add(account);
@@ -73,5 +74,23 @@ public class User {
         return this.uuid;
     }
 
+    /**
+     * check the validity of given pin number
+     * @param pin given pin number by the user
+     * @return boolean weather the pin is correct or not actually true or false
+     */
 
+    public boolean validatePin(String pin) {
+        //hashing the pin number with MD5 hash, This is to prevent using original pin
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            return MessageDigest.isEqual(messageDigest.digest(pin.getBytes()), this.pinHash);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("The Entered pin Number is not valid or incorrect !");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        ;
+        return false;
+    }
 }

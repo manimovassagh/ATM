@@ -106,6 +106,13 @@ public class Bank {
      * @return User object in successful login otherwise return null
      */
     public User userLogin(String userID, String pin){
+        for (User user :this.customersList){
+            if (user.getUUID().compareTo(userID)==0 && user.validatePin(pin)){
+                return user;
+            }
 
+        }
+        //if the user could not pass the login process we return null
+        return null;
     }
 }
