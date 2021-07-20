@@ -61,6 +61,12 @@ public class AutomaticATM {
         return authUser;
     }
 
+    /**
+     * print the user menu interface
+     *
+     * @param theUser user
+     * @param scanner input gateway
+     */
     public static void printUserMenu(User theUser, Scanner scanner) {
 
         //print a summary of user accounts
@@ -80,29 +86,54 @@ public class AutomaticATM {
             if (choice < 1 || choice > 5) {
                 System.out.println("You entered an invalid choice, The valid range is between 1 to 5 !");
             }
-            while (choice < 1 || choice > 5){
-                switch (choice){
-                    case 1:
-                AutomaticATM.showTransactionHistory(theUser, scanner);
-                break;
-                    case 2:
-                        AutomaticATM.withdrawl(theUser, scanner);
-                        break;
-                        case 3:
-                        AutomaticATM.depositFounds(theUser, scanner);
-                        break;
-                        case 4:
-                        AutomaticATM.transferFunds(theUser, scanner);
-                        break;
-
-                }
-                //redisplay the menu until the user wants to quit
-                if(choice!=5){
-                    AutomaticATM.printUserMenu(theUser,scanner);
-                }
-            }
-
         }
+        while (choice < 1 || choice > 5);
+        {
+            switch (choice) {
+                case 1:
+                    AutomaticATM.showTransactionHistory(theUser, scanner);
+                    break;
+                case 2:
+                    AutomaticATM.withdrawl(theUser, scanner);
+                    break;
+                case 3:
+                    AutomaticATM.depositFounds(theUser, scanner);
+                    break;
+                case 4:
+                    AutomaticATM.transferFunds(theUser, scanner);
+                    break;
+
+            }
+            //redisplay the menu until the user wants to quit
+            if (choice != 5) {
+                AutomaticATM.printUserMenu(theUser, scanner);
+            }
+        }
+
+    }
+
+
+    private static void transferFunds(User theUser, Scanner scanner) {
+        int theAccount;
+        //get accounts whose transition history to look at
+        do {
+            System.out.printf("Enter the  number (1-%d) of the account\n " + "whose transaction you want to check ? ", theUser.numberOfAccounts());
+            theAccount = scanner.nextInt() - 1;
+            if (theAccount < 0 || theAccount >= theUser.numberOfAccounts()) {
+                System.out.println("Invalid account Number , Please try again .");
+            }
+        } while (theAccount < 0 || theAccount >= theUser.numberOfAccounts());
+        //print the transaction history
+        theUser.printAccountTransactionHistory(theAccount);
+    }
+
+    private static void depositFounds(User theUser, Scanner scanner) {
+    }
+
+    private static void withdrawl(User theUser, Scanner scanner) {
+    }
+
+    private static void showTransactionHistory(User theUser, Scanner scanner) {
     }
 
 }

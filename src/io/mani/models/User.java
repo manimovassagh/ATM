@@ -76,6 +76,7 @@ public class User {
 
     /**
      * check the validity of given pin number
+     *
      * @param pin given pin number by the user
      * @return boolean weather the pin is correct or not actually true or false
      */
@@ -96,20 +97,37 @@ public class User {
 
     /**
      * get first name of the user
+     *
      * @return first name of user as String
      */
     public String getFirstName() {
-       return this.firstName = firstName;
+        return this.firstName = firstName;
     }
 
     /**
      * method to create summary account for each account
      */
     public void printAccountsSummary() {
-        System.out.printf("\n\n%s's accounts summary",this.firstName);
-        for (int i = 0; i <this.accounts.size() ; i++) {
-            System.out.printf("%d) %s\n",this.accounts.get(i).getSummaryLine());
+        System.out.printf("\n\n%s's accounts summary", this.firstName);
+        for (int i = 0; i < this.accounts.size(); i++) {
+            System.out.printf("%d) %s\n", i + 1, this.accounts.get(i).getSummaryLine());
         }
         System.out.println();
+    }
+
+    /**
+     * return the number of accounts base on the size of accounts array
+     * @return the number of accounts
+     */
+    public int numberOfAccounts() {
+        return this.accounts.size();
+    }
+
+    /**
+     * print the account transaction history
+     * @param theAccount the specific account
+     */
+    public void printAccountTransactionHistory(int theAccountIndex) {
+        this.accounts.get(theAccountIndex).printTransactionHistory();
     }
 }

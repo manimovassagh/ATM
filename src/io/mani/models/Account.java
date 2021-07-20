@@ -32,7 +32,6 @@ public class Account {
         this.transactions = new ArrayList<Transaction>();
 
 
-
     }
 
     public String getUUID() {
@@ -41,17 +40,18 @@ public class Account {
 
     /**
      * show the summary of account
+     *
      * @return formatted String in which the user can better see the overall situation
      */
-    public String  getSummaryLine() {
+    public String getSummaryLine() {
 
         //Todo get the account balance
         double balance = this.getBalance();
         // format the summary line ,depend the balance . if negative then get red
-        if (balance>=0){
-            return String.format("%s : $%.02f : %s",this.accountID,balance,this.accountName);
+        if (balance >= 0) {
+            return String.format("%s : €%.02f : %s", this.accountID, balance, this.accountName);
         } else {
-            return String.format("%s : $(%.02f : %s",this.accountID,balance,this.accountName);
+            return String.format("%s : €(%.02f : %s", this.accountID, balance, this.accountName);
 
         }
 
@@ -59,13 +59,25 @@ public class Account {
 
     /**
      * get balance with each transaction
+     *
      * @return balance of account
      */
     private double getBalance() {
         double balance = 0;
-        for (Transaction transaction :this.transactions){
+        for (Transaction transaction : this.transactions) {
             balance += transaction.getAmount();
         }
         return balance;
+    }
+
+    /**
+     * print the transaction history for this account
+     */
+    public void printTransactionHistory() {
+        System.out.printf("\nTransaction History for account %s\n ", this.accountID);
+        for (int t = this.transactions.size() - 1; t >= 0; t--) {
+            System.out.printf(this.transactions.get(t).getSummaryLine());
+        }
+        System.out.println();
     }
 }
