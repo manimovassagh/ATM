@@ -51,6 +51,7 @@ public class Transaction {
 
     /**
      * get summary of transaction
+     *
      * @return the summary of transaction
      */
     public String getSummaryLine() {
@@ -60,7 +61,7 @@ public class Transaction {
         } else {
             return String.format("%s : €(%.02f) : %s ",
                     this.timestamp.toString(),
-                    this.amount, this.memo);
+                    -this.amount, this.memo);
         }
     }
 }

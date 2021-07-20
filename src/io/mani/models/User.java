@@ -117,6 +117,7 @@ public class User {
 
     /**
      * return the number of accounts base on the size of accounts array
+     *
      * @return the number of accounts
      */
     public int numberOfAccounts() {
@@ -125,6 +126,7 @@ public class User {
 
     /**
      * print the account transaction history
+     *
      * @param theAccountIndex the specific account
      */
     public void printAccountTransactionHistory(int theAccountIndex) {
@@ -133,6 +135,7 @@ public class User {
 
     /**
      * get account balance
+     *
      * @param theAccountIndex account
      * @return the balance of account
      */
@@ -142,6 +145,7 @@ public class User {
 
     /**
      * get id from each account
+     *
      * @param accountIndex index of account
      * @return id of the specific account
      */
@@ -151,11 +155,12 @@ public class User {
 
     /**
      * add account transaction
+     *
      * @param accountIndex index of account
-     * @param amount amount of transaction
-     * @param memo memo for transaction
+     * @param amount       amount of transaction
+     * @param memo         memo for transaction
      */
     public void addAccountTransaction(int accountIndex, double amount, String memo) {
-        this.accounts.get(accountIndex).addTransaction(amount,memo);
+        this.accounts.get(accountIndex).addTransaction(amount, memo);
     }
 }

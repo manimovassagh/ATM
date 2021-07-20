@@ -102,6 +102,9 @@ public class AutomaticATM {
                 case 4:
                     AutomaticATM.transferFunds(theUser, scanner);
                     break;
+                case 5:
+                    scanner.nextLine();
+                    break;
 
             }
             //redisplay the menu until the user wants to quit
@@ -128,7 +131,7 @@ public class AutomaticATM {
         // get the accounts to transfer from
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
-                    "to transfer from :",theUser.numberOfAccounts());
+                    "to transfer from :", theUser.numberOfAccounts());
             fromAccount = scanner.nextInt() - 1;
             if (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
@@ -138,7 +141,7 @@ public class AutomaticATM {
         // get the accounts to transfer to
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
-                    "to transfer to :",theUser.numberOfAccounts());
+                    "to transfer to :", theUser.numberOfAccounts());
             toAccount = scanner.nextInt() - 1;
             if (toAccount < 0 || toAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
@@ -230,7 +233,7 @@ public class AutomaticATM {
 
         //get the amount to transfer
         do {
-            System.out.printf("Enter the amount of your desire transfer (max €%.02f)", accountBalance);
+            System.out.printf("Enter the amount of withdraw (max €%.02f)", accountBalance);
             amount = scanner.nextDouble();
             if (amount < 0) {
                 System.out.println("Negative amount is not allowed !!");
