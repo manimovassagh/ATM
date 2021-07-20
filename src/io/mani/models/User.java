@@ -47,7 +47,7 @@ public class User {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             this.pinHash = messageDigest.digest(pin.getBytes());
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("The Entered Method not recognised. Please Enter a valid Method!");
+            System.out.println("The Entered Method could not be recognised. Please Enter a valid Method!");
             e.printStackTrace();
 //          System.exit(1);
         }
@@ -59,5 +59,13 @@ public class User {
         this.accounts = new ArrayList<Account>();
 
         System.out.printf("New User %s, %s with ID Number %s Has been Created\n" ,lastName,firstName,this.uuid);
+    }
+
+    /**
+     * adding accounts to our accounts array list
+     *  @param account the specific given account
+     */
+    public void addAccount(Account account) {
+        this.accounts.add(account);
     }
 }
