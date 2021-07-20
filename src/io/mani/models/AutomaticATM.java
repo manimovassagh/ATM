@@ -20,7 +20,7 @@ public class AutomaticATM {
         theBank.addAccount(newAccount);
 
         User currentUser;
-        while (true){
+        while (true) {
             //stay in the login prompt until it successfully achieved
             currentUser = AutomaticATM.mainMenuPrompt(theBank, scanner);
 
@@ -29,7 +29,7 @@ public class AutomaticATM {
         }
     }
 
-    public static User mainMenuPrompt (Bank theBank, Scanner scanner){
+    public static User mainMenuPrompt(Bank theBank, Scanner scanner) {
         //initial local variables
         String userID;
         String pin;
@@ -37,8 +37,20 @@ public class AutomaticATM {
 
         //prompt user for user id and pin both until correct input
         do {
-            System.out.printf("\n\nWelcome To %s\n\n ",theBank.getName());
-        } while ()
+            System.out.printf("\n\nWelcome To %s\n\n ", theBank.getName());
+            System.out.print("Enter the User ID: ");
+            userID = scanner.nextLine();
+            System.out.print("Enter Pin:");
+            pin = scanner.nextLine();
+
+            // try to get the user id base on given user and pin
+            authUser = theBank.userLogin(userID, pin);
+            if (authUser == null) {
+                System.out.println("Incorrect User ID or Pin number. " + "Please try again");
+            }
+            //continue the loop until the user give correct user and pin
+        } while (authUser == null);
+        return authUser;
     }
 
 }
