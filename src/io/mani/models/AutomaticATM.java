@@ -9,7 +9,7 @@ public class AutomaticATM {
         Scanner scanner = new Scanner(System.in);
 
         // initialize Bank
-        Bank theBank = new Bank("Sparkasse Mainz");
+        Bank theBank = new Bank("Family Bank Mainz");
 
         // add a user who can register new account
         User aUser = theBank.addUser("Mani", "Movassagh", "4427");
