@@ -68,4 +68,10 @@ public class User {
     public void addAccount(Account account) {
         this.accounts.add(account);
     }
+
+    public String getUUID() {
+        return this.uuid;
+    }
+
+
 }
