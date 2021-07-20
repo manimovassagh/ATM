@@ -29,6 +29,14 @@ public class AutomaticATM {
         }
     }
 
+
+    /**
+     * static method to make an interface for the user for login and authentication
+     *
+     * @param theBank the bank object
+     * @param scanner input gateway
+     * @return authenticated user
+     */
     public static User mainMenuPrompt(Bank theBank, Scanner scanner) {
         //initial local variables
         String userID;
@@ -51,6 +59,50 @@ public class AutomaticATM {
             //continue the loop until the user give correct user and pin
         } while (authUser == null);
         return authUser;
+    }
+
+    public static void printUserMenu(User theUser, Scanner scanner) {
+
+        //print a summary of user accounts
+        theUser.printAccountsSummary();
+        //init
+        int choice;
+        //user menu
+        do {
+            System.out.printf("Welcome %s ,What can i do for You? ", theUser.getFirstName());
+            System.out.println(" 1-Show Transaction history ");
+            System.out.println(" 2-Withdrawl ");
+            System.out.println(" 3-Make a Deposit ");
+            System.out.println(" 3-Transfer ");
+            System.out.println();
+            System.out.println("Enter choice: ");
+            choice = scanner.nextInt();
+            if (choice < 1 || choice > 5) {
+                System.out.println("You entered an invalid choice, The valid range is between 1 to 5 !");
+            }
+            while (choice < 1 || choice > 5){
+                switch (choice){
+                    case 1:
+                AutomaticATM.showTransactionHistory(theUser, scanner);
+                break;
+                    case 2:
+                        AutomaticATM.withdrawl(theUser, scanner);
+                        break;
+                        case 3:
+                        AutomaticATM.depositFounds(theUser, scanner);
+                        break;
+                        case 4:
+                        AutomaticATM.transferFunds(theUser, scanner);
+                        break;
+
+                }
+                //redisplay the menu until the user wants to quit
+                if(choice!=5){
+                    AutomaticATM.printUserMenu(theUser,scanner);
+                }
+            }
+
+        }
     }
 
 }

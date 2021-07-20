@@ -38,4 +38,34 @@ public class Account {
     public String getUUID() {
         return this.accountID;
     }
+
+    /**
+     * show the summary of account
+     * @return formatted String in which the user can better see the overall situation
+     */
+    public String  getSummaryLine() {
+
+        //Todo get the account balance
+        double balance = this.getBalance();
+        // format the summary line ,depend the balance . if negative then get red
+        if (balance>=0){
+            return String.format("%s : $%.02f : %s",this.accountID,balance,this.accountName);
+        } else {
+            return String.format("%s : $(%.02f : %s",this.accountID,balance,this.accountName);
+
+        }
+
+    }
+
+    /**
+     * get balance with each transaction
+     * @return balance of account
+     */
+    private double getBalance() {
+        double balance = 0;
+        for (Transaction transaction :this.transactions){
+            balance += transaction.getAmount();
+        }
+        return balance;
+    }
 }

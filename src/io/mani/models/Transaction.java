@@ -22,19 +22,29 @@ public class Transaction {
 
     /**
      * constructor to generate account without memo
-     * @param amount amount of account
+     *
+     * @param amount           amount of account
      * @param referenceAccount the reference account that made the transaction
      */
-    public Transaction(double amount,Account referenceAccount) {
+    public Transaction(double amount, Account referenceAccount) {
         this.amount = amount;
         this.referenceAccount = referenceAccount;
         this.timestamp = new Date();
         this.memo = "";
     }
+
     // here i am overloading the constructor
-    public Transaction(double amount, String memo,Account referenceAccount) {
+    public Transaction(double amount, String memo, Account referenceAccount) {
         //call the upper constructor
         this(amount, referenceAccount);
         this.memo = memo;
+    }
+
+    /**
+     * get amount of the account
+     * @return the amount of account
+     */
+    public double getAmount() {
+        return this.amount;
     }
 }

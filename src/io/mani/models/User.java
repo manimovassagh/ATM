@@ -93,4 +93,23 @@ public class User {
         ;
         return false;
     }
+
+    /**
+     * get first name of the user
+     * @return first name of user as String
+     */
+    public String getFirstName() {
+       return this.firstName = firstName;
+    }
+
+    /**
+     * method to create summary account for each account
+     */
+    public void printAccountsSummary() {
+        System.out.printf("\n\n%s's accounts summary",this.firstName);
+        for (int i = 0; i <this.accounts.size() ; i++) {
+            System.out.printf("%d) %s\n",this.accounts.get(i).getSummaryLine());
+        }
+        System.out.println();
+    }
 }
