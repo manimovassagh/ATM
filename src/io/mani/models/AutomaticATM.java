@@ -79,8 +79,8 @@ public class AutomaticATM {
             System.out.println(" 1-Show Transaction history ");
             System.out.println(" 2-Withdrawl ");
             System.out.println(" 3-Make a Deposit ");
-            System.out.println(" 3-Transfer ");
-            System.out.println();
+            System.out.println(" 4-Transfer ");
+            System.out.println(" 5-Quit ");
             System.out.println("Enter choice: ");
             choice = scanner.nextInt();
             if (choice < 1 || choice > 5) {
@@ -128,7 +128,7 @@ public class AutomaticATM {
         // get the accounts to transfer from
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
-                    "to transfer from :");
+                    "to transfer from :",theUser.numberOfAccounts());
             fromAccount = scanner.nextInt() - 1;
             if (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
@@ -138,7 +138,7 @@ public class AutomaticATM {
         // get the accounts to transfer to
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
-                    "to transfer to :");
+                    "to transfer to :",theUser.numberOfAccounts());
             toAccount = scanner.nextInt() - 1;
             if (toAccount < 0 || toAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
@@ -179,7 +179,7 @@ public class AutomaticATM {
         String memo;
         // get the accounts to transfer from
         do {
-            System.out.printf("Enter the number (1-%d) of the account \n " +"to transfer from :",theUser.numberOfAccounts());
+            System.out.printf("Enter the number (1-%d) of the account \n " + "to deposit in: ", theUser.numberOfAccounts());
             toAccount = scanner.nextInt() - 1;
             if (toAccount < 0 || toAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
@@ -193,27 +193,25 @@ public class AutomaticATM {
             amount = scanner.nextDouble();
             if (amount < 0) {
                 System.out.println("Negative amount is not allowed !!");
-            } else if (amount > accountBalance) {
-                System.out.printf("You have not sufficient deposit to do this transaction !\n" +
-                        "It can not be greater than €%.02f.\n ", accountBalance);
             }
-        } while (amount < 0 || amount > accountBalance);
+        } while (amount < 0);
 
         scanner.nextLine();
         System.out.println("Enter the memo :");
         memo = scanner.nextLine();
         // do the withdrawl
-        theUser.addAccountTransaction(toAccount,amount,memo);
+        theUser.addAccountTransaction(toAccount, amount, memo);
 
     }
 
 
     /**
-     *withdraw the account
+     * withdraw the account
+     *
      * @param theUser user
      * @param scanner input gateway
      */
-    private static void withdrawl(User theUser,Scanner scanner) {
+    private static void withdrawl(User theUser, Scanner scanner) {
         //init
         int fromAccount;
         double amount;
@@ -222,7 +220,7 @@ public class AutomaticATM {
         // get the accounts to transfer from
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
-                    "to transfer from :");
+                    "to withdraw from: :", theUser.numberOfAccounts());
             fromAccount = scanner.nextInt() - 1;
             if (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
@@ -246,7 +244,7 @@ public class AutomaticATM {
         System.out.println("Enter the memo :");
         memo = scanner.nextLine();
         // do the withdrawl
-        theUser.addAccountTransaction(fromAccount,-1*amount,memo);
+        theUser.addAccountTransaction(fromAccount, -1 * amount, memo);
 
     }
 
@@ -270,7 +268,6 @@ public class AutomaticATM {
         theUser.printAccountTransactionHistory(theAccount);
 
     }
-
 
 
 }
