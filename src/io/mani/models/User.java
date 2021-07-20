@@ -23,7 +23,7 @@ public class User {
     /**
      * The Hash of user pin number
      */
-    private int pinHash[];
+    private byte pinHash[];
     /**
      * The list of accounts for this user
      */
@@ -31,10 +31,11 @@ public class User {
 
     /**
      * This constructor generate our user instance in the way that we want
+     *
      * @param firstName specify the first name of the user
-     * @param lastName specify the last name of the user
-     * @param pin generate the pin with a hash map built in class (learned from tutorial)
-     * @param bankName specify the name of the bank
+     * @param lastName  specify the last name of the user
+     * @param pin       generate the pin with a hash map built in class (learned from tutorial)
+     * @param bankName  specify the name of the bank
      */
     public User(String firstName, String lastName, String pin, Bank bankName) {
 
@@ -44,10 +45,19 @@ public class User {
         //hashing the pin number with MD5 hash, This is to prevent using original pin
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            this.pinHash = messageDigest.digest(pin.getBytes());
         } catch (NoSuchAlgorithmException e) {
             System.out.println("The Entered Method not recognised. Please Enter a valid Method!");
             e.printStackTrace();
 //          System.exit(1);
-                    }
+        }
+        //This UUID must obviously come from database but i don't want to bring it already.
+        //can be later generate in database side
+        this.uuid = bankName.getNewUserUUId();
+
+        //create empty list of accounts
+        this.accounts = new ArrayList<Account>();
+
+        System.out.printf("New User %s, %s with ID Number %s Has been Created\n" ,lastName,firstName,this.uuid);
     }
 }
