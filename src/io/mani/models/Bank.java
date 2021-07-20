@@ -17,6 +17,12 @@ public class Bank {
     private ArrayList<Account> accounts;
 
     public String getNewUserUUId() {
+        //must be define later
        return "1";
+    }
+
+    public String getNewAccountUUId() {
+        //must be define later
+        return "2";
     }
 }

@@ -10,7 +10,7 @@ public class Account {
     /**
      * define name for each account
      */
-    private String name;
+    private String AccountName;
     /**
      * specify balance for each account
      */
@@ -18,11 +18,18 @@ public class Account {
     /**
      * The User that own this account
      */
-    private User Holder;
+    private User AccountHolder;
     /**
      * The list of transactions for this account
      */
     private ArrayList<Transaction> transactions;
 
 
+    public Account(String accountName, User accountHolder, Bank bank) {
+        //set the account name and account holder
+        this.AccountName = accountName;
+        this.AccountHolder = accountHolder;
+        // define new account UUID
+        this.accountID = bank.getNewAccountUUId();
+    }
 }
