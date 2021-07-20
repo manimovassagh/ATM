@@ -12,7 +12,7 @@ public class AutomaticATM {
         Bank theBank = new Bank("Sparkasse Mainz");
 
         // add a user who can register new account
-        User aUser = theBank.addUser("Mani", "Movassagh", "5522");
+        User aUser = theBank.addUser("Mani", "Movassagh", "4427");
 
         // add a checking account
         Account newAccount = new Account("Checking", aUser, theBank);
@@ -75,7 +75,7 @@ public class AutomaticATM {
         int choice;
         //user menu
         do {
-            System.out.printf("Welcome %s ,What can i do for You? ", theUser.getFirstName());
+            System.out.printf("Welcome %s ,What can i do for You?\n", theUser.getFirstName());
             System.out.println(" 1-Show Transaction history ");
             System.out.println(" 2-Withdrawl ");
             System.out.println(" 3-Make a Deposit ");
@@ -113,7 +113,8 @@ public class AutomaticATM {
     }
 
     /**
-     *transfer funds from an account to another
+     * transfer funds from an account to another
+     *
      * @param theUser user
      * @param scanner input gateway
      */
@@ -123,13 +124,13 @@ public class AutomaticATM {
         int fromAccount;
         int toAccount;
         double amount;
-       double accountBalance;
-       // get the accounts to transfer from
+        double accountBalance;
+        // get the accounts to transfer from
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
                     "to transfer from :");
-            fromAccount = scanner.nextInt()-1;
-            if (fromAccount<0 || fromAccount>=theUser.numberOfAccounts()){
+            fromAccount = scanner.nextInt() - 1;
+            if (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
             }
         } while (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts());
@@ -138,23 +139,23 @@ public class AutomaticATM {
         do {
             System.out.printf("Enter the number (1-%d) of the account \n " +
                     "to transfer to :");
-            toAccount = scanner.nextInt()-1;
-            if (toAccount<0 || toAccount>=theUser.numberOfAccounts()){
+            toAccount = scanner.nextInt() - 1;
+            if (toAccount < 0 || toAccount >= theUser.numberOfAccounts()) {
                 System.out.println("Invalid account Number , Please try again .");
             }
         } while (toAccount < 0 || toAccount >= theUser.numberOfAccounts());
 
         //get the amount to transfer
         do {
-            System.out.printf("Enter the amount of your desire transfer (max €%.02f)",accountBalance);
+            System.out.printf("Enter the amount of your desire transfer (max €%.02f)", accountBalance);
             amount = scanner.nextDouble();
-            if (amount<0){
+            if (amount < 0) {
                 System.out.println("Negative amount is not allowed !!");
-            } else if (amount>accountBalance){
-                System.out.printf("You have not sufficient deposit to do this transaction !\n"+
-                        "It can not be greater than €%.02f.\n ",accountBalance);
+            } else if (amount > accountBalance) {
+                System.out.printf("You have not sufficient deposit to do this transaction !\n" +
+                        "It can not be greater than €%.02f.\n ", accountBalance);
             }
-        } while (amount<0|| amount>accountBalance);
+        } while (amount < 0 || amount > accountBalance);
         // finally do the transfer
         theUser.addAccountTransaction(fromAccount, -1 * amount, String.format(
                 "Transfer to Account %s", theUser.getAccountUUID(toAccount)
@@ -167,25 +168,91 @@ public class AutomaticATM {
     }
 
     /**
-     *
      * @param theUser
      * @param scanner
      */
     private static void depositFounds(User theUser, Scanner scanner) {
+//init
+        int toAccount;
+        double amount;
+        double accountBalance;
+        String memo;
+        // get the accounts to transfer from
+        do {
+            System.out.printf("Enter the number (1-%d) of the account \n " +"to transfer from :",theUser.numberOfAccounts());
+            toAccount = scanner.nextInt() - 1;
+            if (toAccount < 0 || toAccount >= theUser.numberOfAccounts()) {
+                System.out.println("Invalid account Number , Please try again .");
+            }
+        } while (toAccount < 0 || toAccount >= theUser.numberOfAccounts());
+        accountBalance = theUser.getAccountBalance(toAccount);
+
+        //get the amount to transfer
+        do {
+            System.out.printf("Enter the amount of your desire transfer (max €%.02f)", accountBalance);
+            amount = scanner.nextDouble();
+            if (amount < 0) {
+                System.out.println("Negative amount is not allowed !!");
+            } else if (amount > accountBalance) {
+                System.out.printf("You have not sufficient deposit to do this transaction !\n" +
+                        "It can not be greater than €%.02f.\n ", accountBalance);
+            }
+        } while (amount < 0 || amount > accountBalance);
+
+        scanner.nextLine();
+        System.out.println("Enter the memo :");
+        memo = scanner.nextLine();
+        // do the withdrawl
+        theUser.addAccountTransaction(toAccount,amount,memo);
+
     }
 
 
     /**
-     *
-     * @param theUser
-     * @param scanner
+     *withdraw the account
+     * @param theUser user
+     * @param scanner input gateway
      */
-    private static void withdrawl(User theUser, Scanner scanner) {
+    private static void withdrawl(User theUser,Scanner scanner) {
+        //init
+        int fromAccount;
+        double amount;
+        double accountBalance;
+        String memo;
+        // get the accounts to transfer from
+        do {
+            System.out.printf("Enter the number (1-%d) of the account \n " +
+                    "to transfer from :");
+            fromAccount = scanner.nextInt() - 1;
+            if (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts()) {
+                System.out.println("Invalid account Number , Please try again .");
+            }
+        } while (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts());
+        accountBalance = theUser.getAccountBalance(fromAccount);
+
+        //get the amount to transfer
+        do {
+            System.out.printf("Enter the amount of your desire transfer (max €%.02f)", accountBalance);
+            amount = scanner.nextDouble();
+            if (amount < 0) {
+                System.out.println("Negative amount is not allowed !!");
+            } else if (amount > accountBalance) {
+                System.out.printf("You have not sufficient deposit to do this transaction !\n" +
+                        "It can not be greater than €%.02f.\n ", accountBalance);
+            }
+        } while (amount < 0 || amount > accountBalance);
+
+        scanner.nextLine();
+        System.out.println("Enter the memo :");
+        memo = scanner.nextLine();
+        // do the withdrawl
+        theUser.addAccountTransaction(fromAccount,-1*amount,memo);
 
     }
 
     /**
-     *show the transaction history for each specific account
+     * show the transaction history for each specific account
+     *
      * @param theUser user
      * @param scanner input gateway
      */
@@ -203,5 +270,7 @@ public class AutomaticATM {
         theUser.printAccountTransactionHistory(theAccount);
 
     }
+
+
 
 }
