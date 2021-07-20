@@ -125,9 +125,18 @@ public class User {
 
     /**
      * print the account transaction history
-     * @param theAccount the specific account
+     * @param theAccountIndex the specific account
      */
     public void printAccountTransactionHistory(int theAccountIndex) {
         this.accounts.get(theAccountIndex).printTransactionHistory();
+    }
+
+    /**
+     * get account balance
+     * @param theAccountIndex account
+     * @return the balance of account
+     */
+    public double getAccountBalance(int theAccountIndex) {
+        return this.accounts.get(theAccountIndex).getBalance();
     }
 }

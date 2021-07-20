@@ -62,7 +62,7 @@ public class Account {
      *
      * @return balance of account
      */
-    private double getBalance() {
+    public double getBalance() {
         double balance = 0;
         for (Transaction transaction : this.transactions) {
             balance += transaction.getAmount();

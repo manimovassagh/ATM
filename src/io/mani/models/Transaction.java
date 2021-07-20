@@ -49,6 +49,10 @@ public class Transaction {
         return this.amount;
     }
 
+    /**
+     * get summary of transaction
+     * @return the summary of transaction
+     */
     public String getSummaryLine() {
         if (this.amount >= 0) {
             return String.format("%s : €%.02f : %s ", this.timestamp.toString(),

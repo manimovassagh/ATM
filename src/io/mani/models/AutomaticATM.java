@@ -112,8 +112,56 @@ public class AutomaticATM {
 
     }
 
-
+    /**
+     *transfer funds from an account to another
+     * @param theUser user
+     * @param scanner input gateway
+     */
     private static void transferFunds(User theUser, Scanner scanner) {
+
+        //init
+        int fromAccount;
+        int toAccount;
+        double amount;
+       double accountBalance;
+       // get the accounts to transfer from
+        do {
+            System.out.printf("Enter the number (1-%d) of the account \n " +
+                    "to transfer from :");
+            fromAccount = scanner.nextInt()-1;
+            if (fromAccount<0 || fromAccount>=theUser.numberOfAccounts()){
+                System.out.println("Invalid account Number , Please try again .");
+            }
+        } while (fromAccount < 0 || fromAccount >= theUser.numberOfAccounts());
+        accountBalance = theUser.getAccountBalance(fromAccount);
+
+
+    }
+
+    /**
+     *
+     * @param theUser
+     * @param scanner
+     */
+    private static void depositFounds(User theUser, Scanner scanner) {
+    }
+
+
+    /**
+     *
+     * @param theUser
+     * @param scanner
+     */
+    private static void withdrawl(User theUser, Scanner scanner) {
+
+    }
+
+    /**
+     *show the transaction history for each specific account
+     * @param theUser user
+     * @param scanner input gateway
+     */
+    private static void showTransactionHistory(User theUser, Scanner scanner) {
         int theAccount;
         //get accounts whose transition history to look at
         do {
@@ -125,15 +173,7 @@ public class AutomaticATM {
         } while (theAccount < 0 || theAccount >= theUser.numberOfAccounts());
         //print the transaction history
         theUser.printAccountTransactionHistory(theAccount);
-    }
 
-    private static void depositFounds(User theUser, Scanner scanner) {
-    }
-
-    private static void withdrawl(User theUser, Scanner scanner) {
-    }
-
-    private static void showTransactionHistory(User theUser, Scanner scanner) {
     }
 
 }
