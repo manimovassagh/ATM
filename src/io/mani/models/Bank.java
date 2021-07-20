@@ -94,6 +94,14 @@ public class Bank {
     }
 
     /**
+     * add account to accounts array list
+     * @param account account will be added to accounts list
+     */
+    public void addAccount(Account account){
+        this.accounts.add(account);
+    }
+
+    /**
      * define a new user for the bank to register
      * @param firstName first name of the user
      * @param lastName last name of the user
@@ -129,4 +137,13 @@ public class Bank {
         //if the user could not pass the login process we return null
         return null;
     }
+
+    /**
+     * get the name of the bank
+     * @return the name of the bank
+     */
+    public String getName() {
+        return this.name;
+    }
+
 }
